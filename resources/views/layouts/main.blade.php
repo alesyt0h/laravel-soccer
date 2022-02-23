@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
 </head>
-<body>
+<body style="background: rgb(212, 212, 212)">
+    <x-sidebar/>
     @yield('content')
 </body>
 </html>
