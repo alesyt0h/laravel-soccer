@@ -10,7 +10,7 @@ class ClubController extends Controller
         return view('club.create');
     }
 
-    public function show($club){
+    public function show($club = null){
         return view('club.show', ['club' => $club]);
     }
 

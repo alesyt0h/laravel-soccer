@@ -10,7 +10,7 @@ class TeamController extends Controller
         return view('team.create');
     }
 
-    public function show($team){
+    public function show($team = null){
         return view('team.show', ['team' => $team]);
     }
 

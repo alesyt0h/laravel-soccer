@@ -26,7 +26,7 @@ Route::controller(CollegeController::class)->group(function () {
     Route::get('college/create', 'create')->name('create');
     Route::get('college/update/{id}', 'update');
     Route::get('college/delete/{id}', 'delete');
-    Route::get('college/{id}', 'show');
+    Route::get('college/{id?}', 'show');
     Route::post('college/create', 'store');
     Route::put('college/update/{id}', 'update');
     Route::delete('college/delete/{id}', 'delete');
@@ -37,7 +37,7 @@ Route::controller(ClubController::class)->group(function () {
     Route::get('club/create', 'create');
     Route::get('club/update/{id}', 'update');
     Route::get('club/delete/{id}', 'delete');
-    Route::get('club/{id}', 'show');
+    Route::get('club/{id?}', 'show');
     Route::post('club/create', 'store');
     Route::put('club/update/{id}', 'update');
     Route::delete('club/delete/{id}', 'delete');
@@ -48,7 +48,7 @@ Route::controller(TeamController::class)->group(function () {
     Route::get('team/create', 'create');
     Route::get('team/update/{id}', 'update');
     Route::get('team/delete/{id}', 'delete');
-    Route::get('team/{id}', 'show');
+    Route::get('team/{id?}', 'show');
     Route::post('team/create', 'store');
     Route::put('team/update/{id}', 'update');
     Route::delete('team/delete/{id}', 'delete');
@@ -59,7 +59,7 @@ Route::controller(MatchController::class)->group(function () {
     Route::get('match/create', 'create');
     Route::get('match/update/{id}', 'update');
     Route::get('match/delete/{id}', 'delete');
-    Route::get('match/{id}', 'show');
+    Route::get('match/{id?}', 'show');
     Route::post('match/create', 'store');
     Route::put('match/update/{id}', 'update');
     Route::delete('match/delete/{id}', 'delete');

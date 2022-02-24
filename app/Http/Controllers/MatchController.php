@@ -10,7 +10,7 @@ class MatchController extends Controller
         return view('match.create');
     }
 
-    public function show($match){
+    public function show($match = null){
         return view('match.show', ['match' => $match]);
     }
 
