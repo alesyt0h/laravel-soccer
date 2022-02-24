@@ -22,7 +22,14 @@ class CollegeController extends Controller
         return view('college.delete', ['college' => $college]);
     }
 
-    public function store($request){
+    public function store(Request $request){
+        $name = $request->name;
+        $shield = $request->shield;
+        $foundation = $request->foundation;
 
+        echo $name, '<br>', $shield, '<br>', $foundation;
+
+        $result = 'success'; // Temporary to test it // REVIEW Result of the store operation - Make redirect to /update/{id} ???
+        return redirect('match.create')->with(['result' => $result]);
     }
 }
