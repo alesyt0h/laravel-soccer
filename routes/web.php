@@ -43,22 +43,22 @@ Route::controller(ClubController::class)->group(function () {
 
 // Team
 Route::controller(TeamController::class)->group(function () {
-    Route::get('team/create', 'create')->name('club.create');
-    Route::get('team/edit/{id}', 'edit')->name('club.edit');
-    Route::get('team/delete/{id}', 'delete')->name('club.delete');
-    Route::get('team/{id?}', 'show')->name('club.show');
-    Route::post('team/create', 'store')->name('club.store');
-    Route::put('team/update/{id}', 'update')->name('club.update');
-    Route::delete('team/destroy/{id}', 'destroy')->name('club.destroy');
+    Route::get('team/create', 'create')->name('team.create');
+    Route::get('team/edit/{id}', 'edit')->name('team.edit');
+    Route::get('team/delete/{id}', 'delete')->name('team.delete');
+    Route::get('team/{id?}', 'show')->name('team.show');
+    Route::post('team/create', 'store')->name('team.store');
+    Route::put('team/update/{id}', 'update')->name('team.update');
+    Route::delete('team/destroy/{id}', 'destroy')->name('team.destroy');
 });
 
 // Match
 Route::controller(MatchController::class)->group(function () {
-    Route::get('match/create', 'create')->name('club.create');
-    Route::get('match/edit/{id}', 'edit')->name('club.edit');
-    Route::get('match/delete/{id}', 'delete')->name('club.delete');
-    Route::get('match/{id?}', 'show')->name('club.show');
-    Route::post('match/create', 'store')->name('club.store');
-    Route::put('match/update/{id}', 'update')->name('club.update');
-    Route::delete('match/destroy/{id}', 'destroy')->name('club.destroy');
+    Route::get('match/create', 'create')->name('match.create');
+    Route::get('match/edit/{id}', 'edit')->name('match.edit');
+    Route::get('match/delete/{id}', 'delete')->name('match.delete');
+    Route::get('match/{id?}', 'show')->name('match.show');
+    Route::post('match/create', 'store')->name('match.store');
+    Route::put('match/update/{id}', 'update')->name('match.update');
+    Route::delete('match/destroy/{id}', 'destroy')->name('match.destroy');
 });
