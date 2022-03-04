@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ClubRequest;
 use Illuminate\Http\Request;
 
 class ClubController extends Controller
@@ -14,7 +15,11 @@ class ClubController extends Controller
         return view('club.show', ['club' => $club]);
     }
 
-    public function update($club){
+    public function update(ClubRequest $club){
+        return redirect()->route('club.update', $club);
+    }
+
+    public function edit($club){
         return view('club.update', ['club' => $club]);
     }
 
@@ -22,14 +27,14 @@ class ClubController extends Controller
         return view('club.delete', ['club' => $club]);
     }
 
-    public function store(Request $request){
-        $name = $request->name;
-        $shield = $request->shield;
-        $foundation = $request->foundation;
+    public function store(ClubRequest $request){
+        // $name = $request->name;
+        // $shield = $request->shield;
+        // $foundation = $request->foundation;
 
-        echo $name, '<br>', $shield, '<br>', $foundation;
+        // echo $name, '<br>', $shield, '<br>', $foundation;
 
         $result = 'success'; // Temporary to test it // REVIEW Result of the store operation - Make redirect to /update/{id} ???
-        return redirect('match.create')->with(['result' => $result]);
+        return redirect('club.create')->with(['result' => $result]);
     }
 }

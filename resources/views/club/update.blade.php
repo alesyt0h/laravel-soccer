@@ -6,18 +6,27 @@
     <h1>This will be where you could edit a club</h1>
     <h2>Club updation</h2>
 
-    <form action="" method="post">
+    <form action="{{route('club.update', $club)}}" method="post">
         @csrf
-        <input type="hidden" name="_method" value="PUT">
+        @method('PUT')
 
         <label for="name">Name*:</label>
         <input type="text" name="name"><br>
+        @error('name')
+            <small>*{{$message}}</small>
+        @enderror
 
         <label for="shield">Shield:</label>
         <input type="text" name="shield"><br>
+        @error('shield')
+            <small>*{{$message}}</small>
+        @enderror
 
         <label for="foundation">Foundation Date*:</label>
         <input type="text" name="foundation"><br>
+        @error('foundation')
+            <small>*{{$message}}</small>
+        @enderror
 
         <button type="submit">Submit</button>
         <button type="reset">Reset</button>
