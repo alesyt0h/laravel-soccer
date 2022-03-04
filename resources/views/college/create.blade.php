@@ -28,9 +28,9 @@
             <small>*{{$message}}</small>
         @enderror
 
-        <label for="foundation">Foundation Date*:</label>
-        <input type="text" name="foundation"><br>
-        @error('foundation')
+        <label for="foundation_date">Foundation Date*:</label>
+        <input type="text" name="foundation_date"><br>
+        @error('foundation_date')
             <small>*{{$message}}</small>
         @enderror
 
