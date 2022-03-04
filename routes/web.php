@@ -33,12 +33,12 @@ Route::controller(CollegeController::class)->group(function () {
 // Club
 Route::controller(ClubController::class)->group(function () {
     Route::get('club/create', 'create')->name('club.create');
-    Route::get('club/edit/{id}', 'edit')->name('club.edit');
-    Route::get('club/delete/{id}', 'delete')->name('club.delete');
-    Route::get('club/{id?}', 'show')->name('club.show');
+    Route::get('club/edit/{club}', 'edit')->name('club.edit');
+    Route::get('club/delete/{club}', 'delete')->name('club.delete');
+    Route::get('club/{club?}', 'show')->name('club.show');
     Route::post('club/create', 'store')->name('club.store');
-    Route::put('club/update/{id}', 'update')->name('club.update');
-    Route::delete('club/destroy/{id}', 'destroy')->name('club.destroy');
+    Route::put('club/update/{club}', 'update')->name('club.update');
+    Route::delete('club/destroy/{club}', 'destroy')->name('club.destroy');
 });
 
 // Team
