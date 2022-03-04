@@ -22,12 +22,12 @@ Route::get('/', function () { return view('home'); })->name('home');
 // College
 Route::controller(CollegeController::class)->group(function () {
     Route::get('college/create', 'create')->name('college.create');
-    Route::get('college/edit/{id}', 'edit')->name('college.edit');
-    Route::get('college/delete/{id}', 'delete')->name('college.delete');
-    Route::get('college/{id?}', 'show')->name('college.show');
+    Route::get('college/edit/{college}', 'edit')->name('college.edit');
+    Route::get('college/delete/{college}', 'delete')->name('college.delete');
+    Route::get('college/{college?}', 'show')->name('college.show');
     Route::post('college/create', 'store')->name('college.store');
-    Route::put('college/update/{id}', 'update')->name('college.update');
-    Route::delete('college/destroy/{id}', 'destroy')->name('college.destroy');
+    Route::put('college/update/{college}', 'update')->name('college.update');
+    Route::delete('college/destroy/{college}', 'destroy')->name('college.destroy');
 });
 
 // Club
