@@ -12,20 +12,38 @@ class ClubController extends Controller
         return view('club.create');
     }
 
-    public function show($club = null){
+    public function show(Club $club){
         return view('club.show', ['club' => $club]);
     }
 
-    public function update(ClubRequest $club){
-        return redirect()->route('club.update', $club);
-    }
-
-    public function edit($club){
+    public function edit(Club $club){
         return view('club.update', ['club' => $club]);
     }
 
-    public function delete($club){
+    public function delete(Club $club){
         return view('club.delete', ['club' => $club]);
+    }
+
+    public function destroy(Club $club){
+        try {
+            $club->delete();
+
+            return redirect()->route('home');
+        } catch (\Throwable $th) {
+            return redirect()->route('club.edit', $club)->with(['result' => $th->getMessage()]);
+        }
+    }
+
+    public function update(ClubRequest $request, Club $club){
+        try {
+            $club->update($request->all());
+
+            return redirect()->route('club.show', $club);
+        } catch (\Throwable $th) {
+            $result = ($th->getCode() === '22007') ? 'Incorrect date format. Should be YEAR-MONTH-DAY' : $th->getMessage();
+
+            return redirect()->route('club.edit', $club)->with(['result' => $result]);
+        }
     }
 
     public function store(ClubRequest $request){
