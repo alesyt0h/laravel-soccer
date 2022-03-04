@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ClubRequest;
+use App\Models\Club;
 use Illuminate\Http\Request;
 
 class ClubController extends Controller
@@ -28,13 +29,16 @@ class ClubController extends Controller
     }
 
     public function store(ClubRequest $request){
-        // $name = $request->name;
-        // $shield = $request->shield;
-        // $foundation = $request->foundation;
 
-        // echo $name, '<br>', $shield, '<br>', $foundation;
+        try {
+            $club = Club::create($request->all());
+            $club->save();
 
-        $result = 'success'; // Temporary to test it // REVIEW Result of the store operation - Make redirect to /update/{id} ???
-        return redirect('club.create')->with(['result' => $result]);
+            return redirect()->route('club.show', $club);
+        } catch (\Throwable $th) {
+            $result = ($th->getCode() === '22007') ? 'Incorrect date format. Should be YEAR-MONTH-DAY' : $th->getMessage();
+
+            return redirect()->route('club.create')->with(['result' => $result]);
+        }
     }
 }
