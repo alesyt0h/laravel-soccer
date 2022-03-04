@@ -16,42 +16,57 @@
 
     <form action="" method="post">
         @csrf
-        <label for="name">Date*:</label>
+        <label for="date">Date*:</label>
         <input type="text" name="date"><br>
+        @error('date')
+            <small>*{{$message}}</small>
+        @enderror
 
-        <label for="local">Local Team:</label>
+        <label for="local_teams">Local Team:</label>
         <select name="local_teams" id="">
             <option value=""></option>
             <option value="manchester">Manchester Utd.</option>
             <option value="madrid">Madrid</option>
             <option value="barcelona">FC Barcelona</option>
         </select>
+        @error('local_teams')
+            <small>*{{$message}}</small>
+        @enderror
         <br>
 
-        <label for="visitor">Visitor Team:</label>
+        <label for="visitor_teams">Visitor Team:</label>
         <select name="visitor_teams" id="">
             <option value=""></option>
             <option value="manchester">Manchester Utd.</option>
             <option value="madrid">Madrid</option>
             <option value="barcelona">FC Barcelona</option>
         </select>
+        @error('visitor_teams')
+            <small>*{{$message}}</small>
+        @enderror
         <br>
 
         <label for="status">Match Status:</label>
         <select name="status" id="">
-            <option value="In Process" selected>In Process</option>
-            <option value="Played">Played</option>
-            <option value="Cancelled">Cancelled</option>
+            <option value="in process" selected>In Process</option>
+            <option value="played">Played</option>
+            <option value="cancelled">Cancelled</option>
         </select>
+        @error('status')
+            <small>*{{$message}}</small>
+        @enderror
         <br>
 
         <label for="result">Match Result:</label>
         <select name="result" id="">
-            <option value="Local">Local</option>
-            <option value="Visitor">Visitor</option>
-            <option value="Draw">Draw</option>
-            <option value="Not played yet" selected>Not played yet</option>
+            <option value="local">Local</option>
+            <option value="visitor">Visitor</option>
+            <option value="draw">Draw</option>
+            <option value="not played yet" selected>Not played yet</option>
         </select>
+        @error('result')
+            <small>*{{$message}}</small>
+        @enderror
         <br>
 
         <button type="submit">Submit</button>
