@@ -44,12 +44,12 @@ Route::controller(ClubController::class)->group(function () {
 // Team
 Route::controller(TeamController::class)->group(function () {
     Route::get('team/create', 'create')->name('team.create');
-    Route::get('team/edit/{id}', 'edit')->name('team.edit');
-    Route::get('team/delete/{id}', 'delete')->name('team.delete');
-    Route::get('team/{id?}', 'show')->name('team.show');
+    Route::get('team/edit/{team}', 'edit')->name('team.edit');
+    Route::get('team/delete/{team}', 'delete')->name('team.delete');
+    Route::get('team/{team?}', 'show')->name('team.show');
     Route::post('team/create', 'store')->name('team.store');
-    Route::put('team/update/{id}', 'update')->name('team.update');
-    Route::delete('team/destroy/{id}', 'destroy')->name('team.destroy');
+    Route::put('team/update/{team}', 'update')->name('team.update');
+    Route::delete('team/destroy/{team}', 'destroy')->name('team.destroy');
 });
 
 // Match
