@@ -44,9 +44,15 @@
         {{-- Show this conditionally depending on the checkbox --}}
         <select name="owner" id="">
             <option value=""></option>
-            <option value="1">Oxford</option>
-            <option value="2">Harvard</option>
-            <option value="3">Club del Barcelona</option>
+            @foreach ($colleges as $college)
+                <option value="{{$college->id}}">{{$college->name}}</option>
+            @endforeach
+        </select>
+        <select name="" id="" style="display:none">
+            <option value=""></option>
+            @foreach ($clubs as $club)
+                <option value="{{$club->id}}">{{$club->name}}</option>
+            @endforeach
         </select>
         @error('owner')
             <small>*{{$message}}</small>
