@@ -55,10 +55,10 @@ Route::controller(TeamController::class)->group(function () {
 // Match
 Route::controller(MatchController::class)->group(function () {
     Route::get('match/create', 'create')->name('match.create');
-    Route::get('match/edit/{id}', 'edit')->name('match.edit');
-    Route::get('match/delete/{id}', 'delete')->name('match.delete');
-    Route::get('match/{id?}', 'show')->name('match.show');
+    Route::get('match/edit/{match}', 'edit')->name('match.edit');
+    Route::get('match/delete/{match}', 'delete')->name('match.delete');
+    Route::get('match/{match?}', 'show')->name('match.show');
     Route::post('match/create', 'store')->name('match.store');
-    Route::put('match/update/{id}', 'update')->name('match.update');
-    Route::delete('match/destroy/{id}', 'destroy')->name('match.destroy');
+    Route::put('match/update/{match}', 'update')->name('match.update');
+    Route::delete('match/destroy/{match}', 'destroy')->name('match.destroy');
 });
