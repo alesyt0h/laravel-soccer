@@ -26,7 +26,7 @@ class ClubRequest extends FormRequest
         return [
             'name' => 'required|min:3',
             'shield' => 'max:255',
-            'foundation' => 'required|date'
+            'foundation_date' => 'required|date'
         ];
     }
 }

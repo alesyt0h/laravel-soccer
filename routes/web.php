@@ -22,43 +22,43 @@ Route::get('/', function () { return view('home'); })->name('home');
 // College
 Route::controller(CollegeController::class)->group(function () {
     Route::get('college/create', 'create')->name('college.create');
-    Route::get('college/edit/{id}', 'edit')->name('college.edit');
-    Route::get('college/delete/{id}', 'delete')->name('college.delete');
-    Route::get('college/{id?}', 'show')->name('college.show');
+    Route::get('college/edit/{college}', 'edit')->name('college.edit');
+    Route::get('college/delete/{college}', 'delete')->name('college.delete');
+    Route::get('college/{college?}', 'show')->name('college.show');
     Route::post('college/create', 'store')->name('college.store');
-    Route::put('college/update/{id}', 'update')->name('college.update');
-    Route::delete('college/destroy/{id}', 'destroy')->name('college.destroy');
+    Route::put('college/update/{college}', 'update')->name('college.update');
+    Route::delete('college/destroy/{college}', 'destroy')->name('college.destroy');
 });
 
 // Club
 Route::controller(ClubController::class)->group(function () {
     Route::get('club/create', 'create')->name('club.create');
-    Route::get('club/edit/{id}', 'edit')->name('club.edit');
-    Route::get('club/delete/{id}', 'delete')->name('club.delete');
-    Route::get('club/{id?}', 'show')->name('club.show');
+    Route::get('club/edit/{club}', 'edit')->name('club.edit');
+    Route::get('club/delete/{club}', 'delete')->name('club.delete');
+    Route::get('club/{club?}', 'show')->name('club.show');
     Route::post('club/create', 'store')->name('club.store');
-    Route::put('club/update/{id}', 'update')->name('club.update');
-    Route::delete('club/destroy/{id}', 'destroy')->name('club.destroy');
+    Route::put('club/update/{club}', 'update')->name('club.update');
+    Route::delete('club/destroy/{club}', 'destroy')->name('club.destroy');
 });
 
 // Team
 Route::controller(TeamController::class)->group(function () {
     Route::get('team/create', 'create')->name('team.create');
-    Route::get('team/edit/{id}', 'edit')->name('team.edit');
-    Route::get('team/delete/{id}', 'delete')->name('team.delete');
-    Route::get('team/{id?}', 'show')->name('team.show');
+    Route::get('team/edit/{team}', 'edit')->name('team.edit');
+    Route::get('team/delete/{team}', 'delete')->name('team.delete');
+    Route::get('team/{team?}', 'show')->name('team.show');
     Route::post('team/create', 'store')->name('team.store');
-    Route::put('team/update/{id}', 'update')->name('team.update');
-    Route::delete('team/destroy/{id}', 'destroy')->name('team.destroy');
+    Route::put('team/update/{team}', 'update')->name('team.update');
+    Route::delete('team/destroy/{team}', 'destroy')->name('team.destroy');
 });
 
 // Match
 Route::controller(MatchController::class)->group(function () {
     Route::get('match/create', 'create')->name('match.create');
-    Route::get('match/edit/{id}', 'edit')->name('match.edit');
-    Route::get('match/delete/{id}', 'delete')->name('match.delete');
-    Route::get('match/{id?}', 'show')->name('match.show');
+    Route::get('match/edit/{match}', 'edit')->name('match.edit');
+    Route::get('match/delete/{match}', 'delete')->name('match.delete');
+    Route::get('match/{match?}', 'show')->name('match.show');
     Route::post('match/create', 'store')->name('match.store');
-    Route::put('match/update/{id}', 'update')->name('match.update');
-    Route::delete('match/destroy/{id}', 'destroy')->name('match.destroy');
+    Route::put('match/update/{match}', 'update')->name('match.update');
+    Route::delete('match/destroy/{match}', 'destroy')->name('match.destroy');
 });

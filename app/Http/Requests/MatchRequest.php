@@ -24,10 +24,10 @@ class MatchRequest extends FormRequest
     public function rules()
     {
         return [
-            'date' => 'required|date',
-            'local_teams' => 'required|different:visitor_teams',
-            'visitor_teams' => 'required|different:local_teams',
-            'status' => 'required|in:in process,played,cancelled',
+            'match_date' => 'required|date',
+            'local' => 'required|different:visitor',
+            'visitor' => 'required|different:local',
+            'status' => 'required|in:in progress,played,canceled',
             'result' => 'required|in:local,visitor,draw,not played yet',
         ];
     }

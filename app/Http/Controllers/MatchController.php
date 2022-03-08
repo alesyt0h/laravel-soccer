@@ -3,39 +3,86 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MatchRequest;
+use App\Models\Matches;
+use App\Models\Team;
 use Illuminate\Http\Request;
 
 class MatchController extends Controller
 {
+
     public function create(){
-        return view('match.create');
+        $teams = Team::all();
+
+        return view('match.create', [
+            'teams' => $teams,
+            'statuses' => $this->getStatuses(),
+            'results' => $this->getResults()
+        ]);
     }
 
-    public function show($match = null){
+    public function show(Matches $match){
         return view('match.show', ['match' => $match]);
     }
 
-    public function edit($match){
-        return view('match.update', ['match' => $match]);
+    public function edit(Matches $match){
+        $teams = Team::all();
+
+        return view('match.update', [
+            'match' => $match,
+            'teams' => $teams,
+            'statuses' => $this->getStatuses(),
+            'results' => $this->getResults()
+        ]);
     }
 
-    public function update(MatchRequest $request, $match){
-        return redirect()->route('match.edit', $match);
-    }
-
-    public function delete($match){
+    public function delete(Matches $match){
         return view('match.delete', ['match' => $match]);
     }
 
+    public function destroy(Matches $match){
+        try {
+            $match->delete();
+
+            return redirect()->route('home');
+        } catch (\Throwable $th) {
+            return redirect()->route('match.edit', $match)->with(['result' => $th->getMessage()]);
+        }
+    }
+
+    public function update(MatchRequest $request, Matches $match){
+        try {
+            $match->update($request->all());
+
+            return redirect()->route('match.show', $match);
+        } catch (\Throwable $th) {
+            $result = ($th->getCode() === '22007') ? 'Incorrect date format. Should be YEAR-MONTH-DAY' : $th->getMessage();
+
+            return redirect()->route('match.edit', $match)->with(['result' => $result]);
+        }
+    }
+
     public function store(MatchRequest $request){
-        // $date = $request->date;
-        // $local = $request->local_teams;
-        // $visitor = $request->visitor_teams;
-        // $status = $request->status;
 
-        // echo $date, '<br>', $local, '<br>', $visitor, '<br>', $status, '<br>';
+        try {
+            $match = Matches::create($request->all());
 
-        $result = 'success'; // Temporary to test it // REVIEW Result of the store operation - Make redirect to /update/{id} ???
-        return redirect()->route('match.create')->with(['result' => $result]);
+            $match->save();
+
+            return redirect()->route('match.show', $match);
+        } catch (\Throwable $th) {
+            $result = ($th->getCode() === '22007') ? 'Incorrect date format. Should be YEAR-MONTH-DAY' : $th->getMessage();
+
+            return redirect()->route('match.create')->with(['result' => $result]);
+        }
+    }
+
+    public function getStatuses(){
+        $statuses = ['played', 'canceled', 'in progress'];
+        return $statuses;
+    }
+
+    public function getResults(){
+        $results = ['local', 'visitor', 'draw', 'not played yet'];
+        return $results;
     }
 }

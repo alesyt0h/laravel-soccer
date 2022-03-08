@@ -16,41 +16,45 @@
 
     <form action="" method="post">
         @csrf
-        <label for="date">Date*:</label>
-        <input type="text" name="date"><br>
-        @error('date')
-            <small>*{{$message}}</small>
-        @enderror
-
-        <label for="local_teams">Local Team:</label>
-        <select name="local_teams" id="">
-            <option value=""></option>
-            <option value="manchester">Manchester Utd.</option>
-            <option value="madrid">Madrid</option>
-            <option value="barcelona">FC Barcelona</option>
-        </select>
-        @error('local_teams')
+        <label for="match_date">Date*:</label>
+        <input type="datetime-local" name="match_date"
+               max="{{now()->addYear()->toDateTimeLocalString('minute')}}">
+        @error('match_date')
             <small>*{{$message}}</small>
         @enderror
         <br>
 
-        <label for="visitor_teams">Visitor Team:</label>
-        <select name="visitor_teams" id="">
+        <label for="local">Local Team:</label>
+        <select name="local" id="">
             <option value=""></option>
-            <option value="manchester">Manchester Utd.</option>
-            <option value="madrid">Madrid</option>
-            <option value="barcelona">FC Barcelona</option>
+            @foreach ($teams as $team)
+                <option value="{{$team->id}}">{{$team->name}}</option>
+            @endforeach
         </select>
-        @error('visitor_teams')
+        @error('local')
+            <small>*{{$message}}</small>
+        @enderror
+        <br>
+
+        <label for="visitor">Visitor Team:</label>
+        <select name="visitor" id="">
+            <option value=""></option>
+            @foreach ($teams as $team)
+                <option value="{{$team->id}}">{{$team->name}}</option>
+            @endforeach
+        </select>
+        @error('visitor')
             <small>*{{$message}}</small>
         @enderror
         <br>
 
         <label for="status">Match Status:</label>
         <select name="status" id="">
-            <option value="in process" selected>In Process</option>
-            <option value="played">Played</option>
-            <option value="cancelled">Cancelled</option>
+            @foreach ($statuses as $status)
+                <option value="{{$status}}" {{($status === 'in progress') ? 'selected' : '' }}>
+                    {{ucfirst($status)}}
+                </option>
+            @endforeach
         </select>
         @error('status')
             <small>*{{$message}}</small>
@@ -59,10 +63,11 @@
 
         <label for="result">Match Result:</label>
         <select name="result" id="">
-            <option value="local">Local</option>
-            <option value="visitor">Visitor</option>
-            <option value="draw">Draw</option>
-            <option value="not played yet" selected>Not played yet</option>
+            @foreach ($results as $result)
+                <option value="{{$result}}" {{($result === 'not played yet') ? 'selected' : '' }}>
+                    {{ucfirst($result)}}
+                </option>
+            @endforeach
         </select>
         @error('result')
             <small>*{{$message}}</small>

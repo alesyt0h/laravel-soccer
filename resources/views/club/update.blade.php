@@ -3,6 +3,13 @@
 @section('title', 'Update ' . $club)
 
 @section('content')
+    @if( Session::has('result') )
+        {{-- TODO Move this to a component --}}
+        <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{ Session::get('result') }}
+        </div>
+    @endif
     <h1>This will be where you could edit a club</h1>
     <h2>Club updation</h2>
 
@@ -11,20 +18,20 @@
         @method('PUT')
 
         <label for="name">Name*:</label>
-        <input type="text" name="name"><br>
+        <input type="text" name="name" value="{{$club->name}}"><br>
         @error('name')
             <small>*{{$message}}</small>
         @enderror
 
         <label for="shield">Shield:</label>
-        <input type="text" name="shield"><br>
+        <input type="text" name="shield" value="{{$club->shield}}"><br>
         @error('shield')
             <small>*{{$message}}</small>
         @enderror
 
-        <label for="foundation">Foundation Date*:</label>
-        <input type="text" name="foundation"><br>
-        @error('foundation')
+        <label for="foundation_date">Foundation Date*:</label>
+        <input type="text" name="foundation_date" value="{{$club->foundation_date}}"><br>
+        @error('foundation_date')
             <small>*{{$message}}</small>
         @enderror
 

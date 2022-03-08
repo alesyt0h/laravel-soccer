@@ -3,40 +3,89 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TeamRequest;
+use App\Models\Club;
+use App\Models\College;
+use App\Models\Team;
 use Illuminate\Http\Request;
 
 class TeamController extends Controller
 {
     public function create(){
-        return view('team.create');
+        $colleges = $this->getColleges();
+        $clubs = $this->getClubs();
+
+        return view('team.create', ['colleges' => $colleges, 'clubs' => $clubs]);
     }
 
-    public function show($team = null){
+    public function show(Team $team = null){
         return view('team.show', ['team' => $team]);
     }
 
-    public function edit($team){
-        return view('team.update', ['team' => $team]);
+    public function edit(Team $team){
+        $colleges = $this->getColleges();
+        $clubs = $this->getClubs();
+
+        if($team->college_owner){
+            $isCollege = 'checked';
+        } else {
+            $isClub = 'checked';
+        }
+
+        return view('team.update', ['team' => $team, 'colleges' => $colleges, 'clubs' => $clubs, 'isCollege' => $isCollege ?? '', 'isClub' => $isClub ?? '']);
     }
 
-    public function update(TeamRequest $request, $team){
-        return redirect()->route('team.edit', $team);
-    }
-
-    public function delete($team){
+    public function delete(Team $team){
         return view('team.delete', ['team' => $team]);
     }
 
+    public function destroy(Team $team){
+        try {
+            $team->delete();
+
+            return redirect()->route('home');
+        } catch (\Throwable $th) {
+            return redirect()->route('team.edit', $team)->with(['result' => $th->getMessage()]);
+        }
+    }
+
+    public function update(TeamRequest $request, Team $team){
+        try {
+            $team->club_owner = null;
+            $team->college_owner = null;
+            $team[$request->owner_type . '_owner'] = $request->owner;
+
+            $team->update($request->all());
+
+
+            return redirect()->route('team.show', $team);
+        } catch (\Throwable $th) {
+            $result = ($th->getCode() === '22007') ? 'Incorrect date format. Should be YEAR-MONTH-DAY' : $th->getMessage();
+
+            return redirect()->route('team.edit', $team)->with(['result' => $result]);
+        }
+    }
+
     public function store(TeamRequest $request){
-        // $name = $request->name;
-        // $shield = $request->shield;
-        // $foundation = $request->foundation;
-        // $owner_type = $request->owner_type;
-        // $owner = $request->owner;
 
-        // echo $name, '<br>', $shield, '<br>', $foundation, '<br>', $owner_type, '<br>', $owner;
+        try {
+            $team = Team::create($request->all());
+            $team[$request->owner_type . '_owner'] = $request->owner;
 
-        $result = 'success'; // Temporary to test it // REVIEW Result of the store operation - Make redirect to /update/{id} ???
-        return redirect()->route('team.create')->with(['result' => $result]);
+            $team->save();
+
+            return redirect()->route('team.show', $team);
+        } catch (\Throwable $th) {
+            $result = ($th->getCode() === '22007') ? 'Incorrect date format. Should be YEAR-MONTH-DAY' : $th->getMessage();
+
+            return redirect()->route('team.create')->with(['result' => $result]);
+        }
+    }
+
+    public function getColleges(){
+        return College::all();
+    }
+
+    public function getClubs(){
+        return Club::all();
     }
 }
