@@ -12,7 +12,7 @@ class CollegeController extends Controller
         return view('college.create');
     }
 
-    public function show(College $college){
+    public function show(College $college = null){
         return view('college.show', ['college' => $college]);
     }
 
