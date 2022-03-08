@@ -1,6 +1,5 @@
 <ol>
-    <li>First record</li>
-    <li>Second record</li>
-    <li>Third record</li>
-    <li>Fourth record</li>
+    @foreach ($entity as $ent)
+        <li>{{$ent->name}}</li>
+    @endforeach
 </ol>
