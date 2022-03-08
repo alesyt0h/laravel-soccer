@@ -18,7 +18,12 @@ class TeamController extends Controller
     }
 
     public function show(Team $team = null){
-        return view('team.show', ['team' => $team]);
+
+        if($team === null){
+            $teams = Team::all();
+        }
+
+        return view('team.show', ['team' => $team, 'teams' => $teams ?? null]);
     }
 
     public function edit(Team $team){

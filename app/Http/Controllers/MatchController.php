@@ -21,7 +21,12 @@ class MatchController extends Controller
     }
 
     public function show(Matches $match = null){
-        return view('match.show', ['match' => $match]);
+
+        if($match === null){
+            $matches = Matches::all();
+        }
+
+        return view('match.show', ['match' => $match, 'matches' => $matches ?? null]);
     }
 
     public function edit(Matches $match){

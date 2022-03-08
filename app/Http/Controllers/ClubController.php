@@ -13,7 +13,12 @@ class ClubController extends Controller
     }
 
     public function show(Club $club = null){
-        return view('club.show', ['club' => $club]);
+
+        if($club === null){
+            $clubs = Club::all();
+        }
+
+        return view('club.show', ['club' => $club, 'clubs' => $clubs ?? null]);
     }
 
     public function edit(Club $club){
