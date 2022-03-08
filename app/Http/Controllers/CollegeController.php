@@ -12,8 +12,13 @@ class CollegeController extends Controller
         return view('college.create');
     }
 
-    public function show(College $college){
-        return view('college.show', ['college' => $college]);
+    public function show(College $college = null){
+
+        if($college === null){
+            $colleges = College::all();
+        }
+
+        return view('college.show', ['college' => $college, 'colleges' => $colleges ?? null]);
     }
 
     public function edit(College $college){
