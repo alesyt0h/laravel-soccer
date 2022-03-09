@@ -7,6 +7,6 @@
     @if ($match)
         <h1>This is the view of {{$match}}, later on, this will display information about that match</h1>
     @else
-        <x-listing :entity="$matches" />
+        <x-listing :entity="$matches" type="match" from="show"/>
     @endif
 @endsection

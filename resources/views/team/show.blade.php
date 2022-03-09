@@ -7,6 +7,6 @@
     @if ($team)
         <h1>This is the view of {{$team}}, later on, this will display information about that team</h1>
     @else
-        <x-listing :entity="$teams" />
+        <x-listing :entity="$teams" type="team" from="show"/>
     @endif
 @endsection
