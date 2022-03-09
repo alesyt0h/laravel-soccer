@@ -7,15 +7,19 @@ use Illuminate\View\Component;
 class Listing extends Component
 {
     public $entity;
+    public $type;
+    public $from;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($entity)
+    public function __construct($entity, $type, $from)
     {
         $this->entity = $entity;
+        $this->type = $type;
+        $this->from = $from;
     }
 
     /**
