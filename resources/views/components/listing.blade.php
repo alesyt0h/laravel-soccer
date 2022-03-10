@@ -40,7 +40,7 @@
                             <td class="truncate max-w-[200px]">
                                 <div class="flex items-center pl-5">
                                     <p class="truncate text-base font-medium leading-none text-gray-700 mr-2">
-                                        <a href="{{route("${type}.show", $ent->id)}}">
+                                        <a href="{{route("${type}.show", $ent->id)}}" class="text-sky-700">
                                             {{($ent->name) ? $ent->name : $ent->local . ' vs ' . $ent->visitor}}
                                         </a>
                                     </p>
