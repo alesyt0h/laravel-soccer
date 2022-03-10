@@ -6,7 +6,7 @@
     {{-- College --}}
     <div class="border-b border-gray-200/20 py-2">
         <h3 class="-my-3 flow-root">
-            <button type="button" id="college-button" class="py-3 w-full flex items-center justify-between text-sm text-gray-300 hover:text-gray-400">
+            <button type="button" id="college-btn" class="py-3 w-full flex items-center justify-between text-sm text-gray-300 hover:text-gray-400">
                 <span class="font-semibold text-xl pl-2">
                     College
                 </span>
@@ -37,7 +37,7 @@
     {{-- Club --}}
     <div class="border-b border-gray-200/20 py-2">
         <h3 class="-my-3 flow-root">
-            <button type="button" id="club-button" class="py-3 w-full flex items-center justify-between text-sm text-gray-300 hover:text-gray-400">
+            <button type="button" id="club-btn" class="py-3 w-full flex items-center justify-between text-sm text-gray-300 hover:text-gray-400">
                 <span class="font-semibold text-xl pl-2">
                     Club
                 </span>
@@ -68,7 +68,7 @@
     {{-- Team --}}
     <div class="border-b border-gray-200/20 py-2">
         <h3 class="-my-3 flow-root">
-            <button type="button" id="team-button" class="py-3 w-full flex items-center justify-between text-sm text-gray-300 hover:text-gray-400">
+            <button type="button" id="team-btn" class="py-3 w-full flex items-center justify-between text-sm text-gray-300 hover:text-gray-400">
                 <span class="font-semibold text-xl pl-2">
                     Team
                 </span>
@@ -99,7 +99,7 @@
     {{-- Match --}}
     <div class="border-b border-gray-200/20 py-2">
         <h3 class="-my-3 flow-root">
-            <button type="button" id="match-button" class="py-3 w-full flex items-center justify-between text-sm text-gray-300 hover:text-gray-400">
+            <button type="button" id="match-btn" class="py-3 w-full flex items-center justify-between text-sm text-gray-300 hover:text-gray-400">
                 <span class="font-semibold text-xl pl-2">
                     Match
                 </span>
@@ -128,3 +128,5 @@
         </div>
     </div>
 </aside>
+
+<script src="{{asset('js/sidebar.js')}}"></script>
