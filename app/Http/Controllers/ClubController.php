@@ -33,7 +33,10 @@ class ClubController extends Controller
         try {
             $club->delete();
 
-            return redirect()->route('home');
+            $success = true;
+            $result = "Club {$club->name} deleted successfully";
+
+            return redirect()->route('home')->with(['result' => $result, 'success' => $success]);
         } catch (\Throwable $th) {
             return redirect()->route('club.edit', $club)->with(['result' => $th->getMessage()]);
         }
