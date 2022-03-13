@@ -30,11 +30,13 @@
                             </td>
                             {{-- Shield --}}
                             <td>
-                                <div class="ml-5">
-                                    <div class="h-[40px] w-[40px] rounded-sm flex flex-shrink-0 justify-center items-center relative">
-                                        <img src="{{$ent->shield ?? asset('images/no-shield.png')}}" width="40" height="40">
+                                @if ($type !== 'match')
+                                    <div class="ml-5">
+                                        <div class="h-[40px] w-[40px] rounded-sm flex flex-shrink-0 justify-center items-center relative">
+                                            <img src="{{$ent->shield ?? asset('images/no-shield.png')}}" width="40" height="40">
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
                             </td>
                             {{-- Name --}}
                             <td class="truncate max-w-[200px]">
