@@ -27,9 +27,14 @@ class AppServiceProvider extends ServiceProvider
     {
         Validator::extend('mimeurl',
             function($attribute, $value, $parameters, $validator) {
-                $finfo = new \finfo(FILEINFO_MIME_TYPE);
-                $mimetype = $finfo->buffer(file_get_contents($value));
-                return in_array($mimetype, $parameters);
+                try {
+                    $finfo = new \finfo(FILEINFO_MIME_TYPE);
+                    $mimetype = $finfo->buffer(file_get_contents($value));
+
+                    return in_array($mimetype, $parameters);
+                } catch (\Throwable $th) {
+                    return in_array($th->getMessage(), $parameters);
+                }
             }, 'The :attribute must be a valid image URL.'
         );
 
