@@ -33,7 +33,10 @@ class CollegeController extends Controller
         try {
             $college->delete();
 
-            return redirect()->route('home');
+            $success = true;
+            $result = "College {$college->name} deleted successfully";
+
+            return redirect()->route('home')->with(['result' => $result, 'success' => $success]);
         } catch (\Throwable $th) {
             return redirect()->route('college.edit', $college)->with(['result' => $th->getMessage()]);
         }
