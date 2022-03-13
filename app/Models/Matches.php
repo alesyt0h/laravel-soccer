@@ -13,7 +13,7 @@ class Matches extends Model
     protected $table = 'matches';
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
-    public static function getMatchesWithTeams(){
+    public static function getMatchesWithTeams($take = 3){
         $matches = Matches::select(
             'matches.id',
             'visitors.name AS visitor',
@@ -26,7 +26,7 @@ class Matches extends Model
         )->from('matches')
         ->join('teams AS visitors', 'matches.visitor', '=', 'visitors.id')
         ->join('teams AS locals', 'matches.local', '=', 'locals.id')
-        ->take(3)
+        ->take($take)
         ->get();
 
         return $matches;
