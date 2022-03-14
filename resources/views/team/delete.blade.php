@@ -10,7 +10,6 @@
             @csrf
             @method('DELETE')
 
-            <input type="hidden" name="_method" value="DELETE">
             <label for="confirm">Are you sure you want to delete <strong>{{$team->name}}</strong> ?</label>
             <br>
             <button class="px-4 py-2 font-semibold text-sm bg-rose-600 text-white rounded-lg shadow-sm mt-4" type="submit">

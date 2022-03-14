@@ -10,7 +10,6 @@
         @csrf
         @method('DELETE')
 
-        <input type="hidden" name="_method" value="DELETE">
         <label for="confirm">
             Are you sure you want to delete <strong>{{$match->visitor->name}}</strong>
             vs <strong>{{$match->local->name}}</strong> match?
