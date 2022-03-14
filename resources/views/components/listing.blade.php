@@ -98,6 +98,8 @@
                 <a href="{{route("${type}.show")}}" class="mt-4 inline-block focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none">
                     Show all {{Str::plural($type)}}
                 </a>
+            @elseif ($from !== 'home')
+                {{$entity->links()}}
             @endif
         </div>
     </div>
