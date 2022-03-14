@@ -1,8 +1,20 @@
-<aside class="bg-gray-800 w-[300px] min-h-screen fixed shadow-2xl text-white shadow-[10px_0_5px_-2px_rgba(68,68,68,1)] border-r-2 border-gray-500/60">
+<aside class="bg-gray-800 hidden w-screen z-50 sm:block sm:w-[300px] min-h-screen fixed shadow-2xl text-white shadow-[10px_0_5px_-2px_rgba(68,68,68,1)] border-r-2 border-gray-500/60">
     {{-- Logo --}}
-    <a href="{{route('home')}}">
-        <img src="{{asset('images/soccer-league-logo.png')}}" class="m-4">
-    </a>
+    <div class="flex justify-between">
+        <a href="{{route('home')}}">
+            <img src="{{asset('images/soccer-league-logo.png')}}" class="m-4">
+        </a>
+        {{-- Sidebar Close --}}
+        <div class="m-4 inset-y-0 left-0 flex items-center sm:hidden" id="sidebar-close">
+            <button type="button" class="inline-flex items-center justify-center ml-1 p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700" onclick="mobileMenuCloser()">
+                <span class="sr-only">Close sidebar</span>
+                <svg id="close-mobile" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+
+    </div>
     {{-- College --}}
     <div class="border-b border-gray-200/20 py-2">
         <h3 class="-my-3 flow-root">
@@ -128,5 +140,14 @@
         </div>
     </div>
 </aside>
-
+{{-- Sidebar show --}}
+<div class="m-4 absolute left-0 flex items-center md:hidden" id="sidebar-show">
+    <!-- Mobile menu button-->
+    <button type="button" class="inline-flex items-center justify-center ml-1 p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700" onclick="mobileMenuOpener()">
+        <span class="sr-only">Open sidebar</span>
+        <svg id="open-mobile" class="h-6 w-6 block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+    </button>
+</div>
 <script src="{{asset('js/sidebar.js')}}"></script>
