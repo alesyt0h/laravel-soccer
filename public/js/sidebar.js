@@ -102,3 +102,12 @@
     });
 
 })();
+
+function mobileMenuOpener(){
+    document.querySelector('aside').classList.remove('hidden');
+    document.querySelector('#sidebar-show').classList.toggle('hidden');
+}
+function mobileMenuCloser(){
+    document.querySelector('aside').classList.add('hidden');
+    document.querySelector('#sidebar-show').classList.toggle('hidden');
+}
