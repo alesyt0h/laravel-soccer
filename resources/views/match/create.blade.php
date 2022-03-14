@@ -14,7 +14,7 @@
                     <label for="match_date">Match Date*:</label>
                     <br>
                     @error('match_date')
-                        <small class="text-red-600">{{$message}}</small>
+                        <small class="text-red-600">{{$message}}</small><br>
                     @enderror
                     <input type="datetime-local" name="match_date"
                         max="{{now()->addYear()->toDateTimeLocalString('minute')}}">
@@ -23,7 +23,7 @@
                     <label for="local">Local Team*:</label>
                     <br>
                     @error('local')
-                        <small class="text-red-600">{{$message}}</small>
+                        <small class="text-red-600">{{$message}}</small><br>
                     @enderror
                     <select name="local" id="">
                         <option value=""></option>
@@ -36,7 +36,7 @@
                     <label for="visitor">Visitor Team*:</label>
                     <br>
                     @error('visitor')
-                        <small class="text-red-600">{{$message}}</small>
+                        <small class="text-red-600">{{$message}}</small><br>
                     @enderror
                     <select name="visitor" id="">
                         <option value=""></option>
@@ -49,7 +49,7 @@
                     <label for="status">Match Status*:</label>
                     <br>
                     @error('status')
-                        <small class="text-red-600">{{$message}}</small>
+                        <small class="text-red-600">{{$message}}</small><br>
                     @enderror
                     <select name="status" id="">
                         @foreach ($statuses as $status)
@@ -63,7 +63,7 @@
                     <label for="result">Match Result*:</label>
                     <br>
                     @error('result')
-                        <small class="text-red-600">*{{$message}}</small>
+                        <small class="text-red-600">*{{$message}}</small><br>
                     @enderror
                     <select name="result" id="">
                         @foreach ($results as $result)
