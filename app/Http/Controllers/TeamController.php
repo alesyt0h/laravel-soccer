@@ -57,7 +57,7 @@ class TeamController extends Controller
         } catch (\Throwable $th) {
             $result = ($th->getCode() === '23000') ? 'You must delete first the matches associated to this team' : $th->getMessage();
 
-            return redirect()->route('team.edit', $team)->with(['result' => $result]);
+            return redirect()->route('team.delete', $team)->with(['result' => $result]);
         }
     }
 

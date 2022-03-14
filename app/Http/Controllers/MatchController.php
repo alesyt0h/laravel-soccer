@@ -62,7 +62,7 @@ class MatchController extends Controller
 
             return redirect()->route('home')->with(['result' => $result, 'success' => $success]);
         } catch (\Throwable $th) {
-            return redirect()->route('match.edit', $match)->with(['result' => $th->getMessage()]);
+            return redirect()->route('match.delete', $match)->with(['result' => $th->getMessage()]);
         }
     }
 
