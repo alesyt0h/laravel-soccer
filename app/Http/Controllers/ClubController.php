@@ -38,7 +38,9 @@ class ClubController extends Controller
 
             return redirect()->route('home')->with(['result' => $result, 'success' => $success]);
         } catch (\Throwable $th) {
-            return redirect()->route('club.edit', $club)->with(['result' => $th->getMessage()]);
+            $result = ($th->getCode() === '23000') ? 'You must delete first the teams associated to this club' : $th->getMessage();
+
+            return redirect()->route('club.edit', $club)->with(['result' => $result]);
         }
     }
 
