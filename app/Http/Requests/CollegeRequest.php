@@ -25,7 +25,7 @@ class CollegeRequest extends FormRequest
     {
         return [
             'name' => 'required|min:3',
-            'shield' => 'max:255',
+            'shield' => 'bail|nullable|url|max:255|mimeurl:image/jpeg,image/bmp,image/png,image/gif,image/svg+xml,image/webp',
             'foundation_date' => 'required|date'
         ];
     }

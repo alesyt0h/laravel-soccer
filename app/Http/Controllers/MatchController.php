@@ -23,7 +23,10 @@ class MatchController extends Controller
     public function show(Matches $match = null){
 
         if($match === null){
-            $matches = Matches::all();
+            $matches = Matches::getMatchesWithTeams(PHP_INT_MAX);
+        } else {
+            $match->visitor = Team::select('name', 'shield', 'id')->where('id', $match->visitor)->first();
+            $match->local = Team::select('name', 'shield', 'id')->where('id', $match->local)->first();
         }
 
         return view('match.show', ['match' => $match, 'matches' => $matches ?? null]);
@@ -41,16 +44,25 @@ class MatchController extends Controller
     }
 
     public function delete(Matches $match){
+        $match->visitor = Team::select('name', 'shield')->where('id', $match->visitor)->first();
+        $match->local = Team::select('name', 'shield')->where('id', $match->local)->first();
+
         return view('match.delete', ['match' => $match]);
     }
 
     public function destroy(Matches $match){
         try {
+            $visitor = Team::select('name')->where('id', $match->visitor)->first();
+            $local = Team::select('name')->where('id', $match->local)->first();
+
             $match->delete();
 
-            return redirect()->route('home');
+            $success = true;
+            $result = "Match {$local->name} vs {$visitor->name} deleted successfully";
+
+            return redirect()->route('home')->with(['result' => $result, 'success' => $success]);
         } catch (\Throwable $th) {
-            return redirect()->route('match.edit', $match)->with(['result' => $th->getMessage()]);
+            return redirect()->route('match.delete', $match)->with(['result' => $th->getMessage()]);
         }
     }
 

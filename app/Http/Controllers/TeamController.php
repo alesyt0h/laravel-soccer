@@ -21,8 +21,11 @@ class TeamController extends Controller
 
         if($team === null){
             $teams = Team::all();
+        } else if($team->college_owner){
+            $team->college_owner = College::select('name','id')->where('id', $team->college_owner)->first();
+        } else if($team->club_owner){
+            $team->club_owner = Club::select('name','id')->where('id', $team->club_owner)->first();
         }
-
         return view('team.show', ['team' => $team, 'teams' => $teams ?? null]);
     }
 
@@ -47,9 +50,14 @@ class TeamController extends Controller
         try {
             $team->delete();
 
-            return redirect()->route('home');
+            $success = true;
+            $result = "Team {$team->name} deleted successfully";
+
+            return redirect()->route('home')->with(['result' => $result, 'success' => $success]);
         } catch (\Throwable $th) {
-            return redirect()->route('team.edit', $team)->with(['result' => $th->getMessage()]);
+            $result = ($th->getCode() === '23000') ? 'You must delete first the matches associated to this team' : $th->getMessage();
+
+            return redirect()->route('team.delete', $team)->with(['result' => $result]);
         }
     }
 

@@ -12,9 +12,9 @@ class HomeController extends Controller
 {
     public function __invoke()
     {
-        $clubs = Club::all()->take(10);
-        $colleges = College::all()->take(10);
-        $teams = Team::all()->take(10);
+        $clubs = Club::all()->take(3);
+        $colleges = College::all()->take(3);
+        $teams = Team::all()->take(3);
         $matches = Matches::getMatchesWithTeams();
 
         return view('home', [

@@ -33,9 +33,14 @@ class CollegeController extends Controller
         try {
             $college->delete();
 
-            return redirect()->route('home');
+            $success = true;
+            $result = "College {$college->name} deleted successfully";
+
+            return redirect()->route('home')->with(['result' => $result, 'success' => $success]);
         } catch (\Throwable $th) {
-            return redirect()->route('college.edit', $college)->with(['result' => $th->getMessage()]);
+            $result = ($th->getCode() === '23000') ? 'You must delete first the teams associated to this college' : $th->getMessage();
+
+            return redirect()->route('college.delete', $college)->with(['result' => $result]);
         }
     }
 

@@ -1,30 +1,22 @@
 @extends('layouts.main')
 
-@section('title', 'Home')
-
 @section('content')
-    <h1>This is the homePage</h1>
-    <main style="display: grid; grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);"">
-        <div>
-            <span>Colleges</span>
-            <x-listing :entity="$colleges"/>
-            <button>Show all colleges</button>
-        </div>
-        <div>
-            <span>Clubs</span>
-            <x-listing :entity="$clubs"/>
-            <button>Show all clubs</button>
-        </div>
-        <div>
-            <span>Teams</span>
-            <x-listing :entity="$teams"/>
-            <button>Show all teams</button>
-        </div>
-        <div>
-            <span>Matches</span>
-            <x-listing :entity="$matches"/>
-            <button>Show all matches</button>
-        </div>
-    </main>
+    <div>
+        <h1 class="text-2xl font-semibold text-center mb-2">Soccer League</h1>
+        <x-alert/>
+        <main class="scale-90 grid grid-cols-2 grid-rows-2">
+            <div class="mb-8 mt-8">
+                <x-listing :entity="$colleges" type="college" from="home"/>
+            </div>
+            <div class="mb-8 mt-8">
+                <x-listing :entity="$clubs" type="club" from="home"/>
+            </div>
+            <div class="mb-8 mt-8">
+                <x-listing :entity="$teams" type="team" from="home"/>
+            </div>
+            <div class="mb-8 mt-8">
+                <x-listing :entity="$matches" type="match" from="home"/>
+            </div>
+        </main>
+    </div>
 @endsection

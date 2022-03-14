@@ -13,18 +13,20 @@ class Matches extends Model
     protected $table = 'matches';
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
-    public static function getMatchesWithTeams(){
+    public static function getMatchesWithTeams($take = 3){
         $matches = Matches::select(
             'matches.id',
             'visitors.name AS visitor',
             'locals.name AS local',
             'matches.match_date',
             'matches.result',
-            'matches.status'
+            'matches.status',
+            'matches.created_at',
+            'matches.updated_at'
         )->from('matches')
         ->join('teams AS visitors', 'matches.visitor', '=', 'visitors.id')
         ->join('teams AS locals', 'matches.local', '=', 'locals.id')
-        ->take(10)
+        ->take($take)
         ->get();
 
         return $matches;
