@@ -2,9 +2,16 @@
 
 @section('title', 'Edit ' . $team->name)
 
+@if (!count($colleges ?? []))
+    {{Session::put('result', 'There is no Colleges created, you will be able to select only a Club as owner, but not a College')}}
+@elseif (!count($clubs ?? []))
+    {{Session::put('result', 'There is no Clubs created, you will be able to select only a College as owner, but not a Club')}}
+@endif
+
 @section('content')
     <div class="flex flex-col">
         <x-alert/>
+        {{Session::forget('result')}}
         <div class="self-center">
             <h2 class="font-semibold text-2xl mb-2">Edit team</h2>
             <form action="{{route('team.update', $team)}}" method="post">
@@ -21,7 +28,7 @@
                 <label for="foundation_date">Foundation Date*:</label>
                 <br>
                 @error('foundation_date')
-                    <small class="text-red-600">*{{$message}}</small><br>
+                    <small class="text-red-600">{{$message}}</small><br>
                 @enderror
                 <input type="date" name="foundation_date" max="{{now()->toDateString()}}" value="{{$team->foundation_date}}">
                 <br>
@@ -29,7 +36,7 @@
                 <label for="shield">Shield:</label>
                 <br>
                 @error('shield')
-                    <small class="text-red-600">*{{$message}}</small><br>
+                    <small class="text-red-600">{{$message}}</small><br>
                 @enderror
                 <input type="text" name="shield" value="{{$team->shield}}">
                 <br>
@@ -39,8 +46,10 @@
                 @error('owner_type')
                     <small class="text-red-600">{{$message}}</small><br>
                 @enderror
-                <input type="radio" name="owner_type" id="" value="college" {{$isCollege}}> College
-                <input type="radio" name="owner_type" id="" value="club" class="ml-2" {{$isClub}}> Club
+                <input type="radio" name="owner_type" id="" value="college" class="{{count($colleges) ? '' : 'hidden'}}" {{$isCollege}}>
+                <label for="owner_type_college" class="{{count($colleges) ? '' : 'hidden'}}">College</label>
+                <input type="radio" name="owner_type" id="" value="club" class="{{count($clubs) ? '' : 'hidden'}} ml-2" {{$isClub}}>
+                <label for="owner_type_club" class="{{count($clubs) ? '' : 'hidden'}}">Club</label>
                 <br>
                 @error('owner')
                     <small class="text-red-600">{{$message}}</small><br>

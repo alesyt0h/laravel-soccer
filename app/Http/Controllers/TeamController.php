@@ -22,13 +22,10 @@ class TeamController extends Controller
         if($team === null){
             $teams = Team::all();
         } else if($team->college_owner){
-            $isCollege = 'checked';
             $team->college_owner = College::select('name','id')->where('id', $team->college_owner)->first();
         } else if($team->club_owner){
-            $isClub = 'checked';
             $team->club_owner = Club::select('name','id')->where('id', $team->club_owner)->first();
         }
-
         return view('team.show', ['team' => $team, 'teams' => $teams ?? null]);
     }
 
