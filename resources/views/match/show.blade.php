@@ -14,11 +14,11 @@
                                 Teams
                             </dt>
                             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                <a href="{{route('team.show', $match->visitor)}}" class="text-blue-400">
+                                <a href="{{route('team.show', $match->visitor->id)}}" class="text-blue-400">
                                     <strong>{{$match->visitor->name}}</strong>
                                 </a>
                                 (visitor) vs
-                                <a href="{{route('team.show', $match->local)}}" class="text-blue-400">
+                                <a href="{{route('team.show', $match->local->id)}}" class="text-blue-400">
                                     <strong>{{$match->local->name}}</strong>
                                 </a>
                                 (local)
@@ -72,9 +72,9 @@
                                 Shields
                             </dt>
                             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 flex">
-                                <img src="{{$match->visitor->shield ?? asset('images/no-shield.png')}}" width="100" height="100">
+                                <img src="{{$match->visitor->shield ?? asset('images/no-shield.png')}}" width="100" height="100" class="self-center">
                                 <span class="self-center font-bold">VS</span>
-                                <img src="{{$match->local->shield ?? asset('images/no-shield.png')}}" width="100" height="100">
+                                <img src="{{$match->local->shield ?? asset('images/no-shield.png')}}" width="100" height="100" class="self-center">
                             </dd>
                         </div>
                     </dl>

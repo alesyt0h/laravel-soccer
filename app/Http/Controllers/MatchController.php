@@ -25,8 +25,8 @@ class MatchController extends Controller
         if($match === null){
             $matches = Matches::getMatchesWithTeams(PHP_INT_MAX);
         } else {
-            $match->visitor = Team::select('name', 'shield')->where('id', $match->visitor)->first();
-            $match->local = Team::select('name', 'shield')->where('id', $match->local)->first();
+            $match->visitor = Team::select('name', 'shield', 'id')->where('id', $match->visitor)->first();
+            $match->local = Team::select('name', 'shield', 'id')->where('id', $match->local)->first();
         }
 
         return view('match.show', ['match' => $match, 'matches' => $matches ?? null]);
