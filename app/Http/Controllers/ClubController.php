@@ -15,7 +15,7 @@ class ClubController extends Controller
     public function show(Club $club = null){
 
         if($club === null){
-            $clubs = Club::all();
+            $clubs = Club::paginate();
         }
 
         return view('club.show', ['club' => $club, 'clubs' => $clubs ?? null]);

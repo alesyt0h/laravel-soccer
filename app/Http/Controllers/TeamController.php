@@ -20,7 +20,7 @@ class TeamController extends Controller
     public function show(Team $team = null){
 
         if($team === null){
-            $teams = Team::all();
+            $teams = Team::paginate();
         } else if($team->college_owner){
             $team->college_owner = College::select('name','id')->where('id', $team->college_owner)->first();
         } else if($team->club_owner){

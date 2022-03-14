@@ -23,7 +23,7 @@ class MatchController extends Controller
     public function show(Matches $match = null){
 
         if($match === null){
-            $matches = Matches::getMatchesWithTeams(PHP_INT_MAX);
+            $matches = Matches::getMatchesWithTeams(15);
         } else {
             $match->visitor = Team::select('name', 'shield', 'id')->where('id', $match->visitor)->first();
             $match->local = Team::select('name', 'shield', 'id')->where('id', $match->local)->first();

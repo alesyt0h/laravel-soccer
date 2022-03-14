@@ -15,7 +15,7 @@ class CollegeController extends Controller
     public function show(College $college = null){
 
         if($college === null){
-            $colleges = College::all();
+            $colleges = College::paginate();
         }
 
         return view('college.show', ['college' => $college, 'colleges' => $colleges ?? null]);

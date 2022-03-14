@@ -27,7 +27,7 @@ class Matches extends Model
         ->join('teams AS visitors', 'matches.visitor', '=', 'visitors.id')
         ->join('teams AS locals', 'matches.local', '=', 'locals.id')
         ->take($take)
-        ->get();
+        ->paginate($take);
 
         return $matches;
     }
