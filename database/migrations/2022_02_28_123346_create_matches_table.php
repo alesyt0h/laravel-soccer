@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('matches', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->foreignId('visitor')->references('id')->on('teams');
+            $table->foreignId('local')->references('id')->on('teams');
+            $table->dateTimeTz('match_date');
+            $table->enum('result', ['local', 'visitor', 'draw', 'not played yet'])->nullable();
+            $table->enum('status', ['played', 'canceled', 'in progress']);
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('matches');
     }
 };
