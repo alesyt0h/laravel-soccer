@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', HomeController::class)->name('home');
 
 // College
-Route::controller(CollegeController::class)->group(function () {
+Route::controller(CollegeController::class)->middleware('auth')->group(function () {
     Route::get('college/create', 'create')->name('college.create');
     Route::get('college/edit/{college}', 'edit')->name('college.edit');
     Route::get('college/delete/{college}', 'delete')->name('college.delete');
@@ -32,7 +32,7 @@ Route::controller(CollegeController::class)->group(function () {
 });
 
 // Club
-Route::controller(ClubController::class)->group(function () {
+Route::controller(ClubController::class)->middleware('auth')->group(function () {
     Route::get('club/create', 'create')->name('club.create');
     Route::get('club/edit/{club}', 'edit')->name('club.edit');
     Route::get('club/delete/{club}', 'delete')->name('club.delete');
@@ -43,7 +43,7 @@ Route::controller(ClubController::class)->group(function () {
 });
 
 // Team
-Route::controller(TeamController::class)->group(function () {
+Route::controller(TeamController::class)->middleware('auth')->group(function () {
     Route::get('team/create', 'create')->name('team.create');
     Route::get('team/edit/{team}', 'edit')->name('team.edit');
     Route::get('team/delete/{team}', 'delete')->name('team.delete');
@@ -54,7 +54,7 @@ Route::controller(TeamController::class)->group(function () {
 });
 
 // Match
-Route::controller(MatchController::class)->group(function () {
+Route::controller(MatchController::class)->middleware('auth')->group(function () {
     Route::get('match/create', 'create')->name('match.create');
     Route::get('match/edit/{match}', 'edit')->name('match.edit');
     Route::get('match/delete/{match}', 'delete')->name('match.delete');
@@ -63,9 +63,5 @@ Route::controller(MatchController::class)->group(function () {
     Route::put('match/update/{match}', 'update')->name('match.update');
     Route::delete('match/destroy/{match}', 'destroy')->name('match.destroy');
 });
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
