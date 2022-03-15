@@ -12,6 +12,16 @@
                     </a>
                 </x-slot>
 
+                {{-- Don't have an account? --}}
+                <div class="mb-4">
+                    <span class="text-sm text-gray-600">
+                        Don't have an account?
+                    </span>
+                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
+                        Register now!
+                    </a>
+                </div>
+
                 <!-- Session Status -->
                 <x-auth-session-status class="mb-4" :status="session('status')" />
 
