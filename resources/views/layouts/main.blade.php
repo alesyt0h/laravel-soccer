@@ -8,7 +8,14 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="overflow-x-hidden !bg-cover !bg-fixed" style="background: url({{ asset('images/football-bg.jpg') }})">
-    @if (request()->is(['login', 'register']))
+    @if (request()->is([
+        'login',
+        'register',
+        'forgot-password',
+        'reset-password/*',
+        'confirm-password',
+        'verify-email/*'
+    ]))
         @php
             $noMargin = true;
         @endphp
