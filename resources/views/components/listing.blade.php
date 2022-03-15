@@ -79,12 +79,14 @@
                                     </td>
                                 @endif
                                 {{-- Edit & Delete --}}
-                                <td class="pl-4">
-                                    <a href="{{route("${type}.edit", $ent->id)}}" class="focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none">Edit</a>
-                                </td>
-                                <td class="pl-4">
-                                    <a href="{{route("${type}.delete", $ent->id)}}" class="focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none">Delete</a>
-                                </td>
+                                @if ($ent->created_by === (auth()->user()->id ?? 0))
+                                    <td class="pl-4">
+                                        <a href="{{route("${type}.edit", $ent->id)}}" class="focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none">Edit</a>
+                                    </td>
+                                    <td class="pl-4">
+                                        <a href="{{route("${type}.delete", $ent->id)}}" class="focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none">Delete</a>
+                                    </td>
+                                @endif
                             </tr>
                             <tr class="h-3"></tr>
                         @endforeach
