@@ -49,6 +49,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect(RouteServiceProvider::HOME)->with(['result' => 'The account has been created successfully. However we require email verification,an email has been sent to your email address. Please verify your email.']);
     }
 }
