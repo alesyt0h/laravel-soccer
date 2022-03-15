@@ -17,7 +17,7 @@
                         <small class="text-red-600">{{$message}}</small><br>
                     @enderror
                     <input type="datetime-local" name="match_date"
-                        max="{{now()->addYear()->toDateTimeLocalString('minute')}}">
+                        max="{{now()->addYear()->toDateTimeLocalString('minute')}}" value="{{old('match_date')}}">
                     <br>
 
                     <label for="local">Local Team*:</label>
