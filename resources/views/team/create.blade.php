@@ -26,7 +26,7 @@
                     @error('name')
                         <small class="text-red-600">{{$message}}</small><br>
                     @enderror
-                    <input type="text" name="name">
+                    <input type="text" name="name" value="{{old('name')}}">
                     <br>
 
                     <label for="foundation_date">Foundation Date*:</label>
@@ -34,7 +34,7 @@
                     @error('foundation_date')
                         <small class="text-red-600">{{$message}}</small><br>
                     @enderror
-                    <input type="date" name="foundation_date" max="{{now()->toDateString()}}">
+                    <input type="date" name="foundation_date" max="{{now()->toDateString()}}" value="{{old('foundation_date')}}">
                     <br>
 
                     <label for="shield">Shield:</label>
@@ -42,7 +42,7 @@
                     @error('shield')
                         <small class="text-red-600">{{$message}}</small><br>
                     @enderror
-                    <input type="text" name="shield">
+                    <input type="text" name="shield" value="{{old('shield')}}">
                     <br>
 
                     <label for="owner">Owner*:</label>

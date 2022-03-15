@@ -13,19 +13,19 @@
                 @error('name')
                     <small class="text-red-600">{{$message}}</small><br>
                 @enderror
-                <input type="text" name="name" class="mb-1"><br>
+                <input type="text" name="name" class="mb-1" value="{{old('name')}}"><br>
 
                 <label for="shield">Shield URL:</label><br>
                 @error('shield')
                     <small class="text-red-600">{{$message}}</small><br>
                 @enderror
-                <input type="text" name="shield" class="mb-1"><br>
+                <input type="text" name="shield" class="mb-1" value="{{old('shield')}}"><br>
 
                 <label for="foundation_date">Foundation Date*:</label><br>
                 @error('foundation_date')
                     <small class="text-red-600">{{$message}}</small><br>
                 @enderror
-                <input type="date" name="foundation_date" max="{{now()->toDateString()}}"><br>
+                <input type="date" name="foundation_date" max="{{now()->toDateString()}}" value="{{old('foundation_date')}}"><br>
 
                 <button class="px-4 py-2 font-semibold text-sm bg-cyan-800 text-white rounded-lg shadow-sm mt-4" type="submit">
                     Create
