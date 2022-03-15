@@ -63,3 +63,9 @@ Route::controller(MatchController::class)->group(function () {
     Route::put('match/update/{match}', 'update')->name('match.update');
     Route::delete('match/destroy/{match}', 'destroy')->name('match.destroy');
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
