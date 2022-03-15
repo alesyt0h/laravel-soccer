@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name', 50);
             $table->string('shield', 255)->nullable();
             $table->date('foundation_date');
+            $table->foreignId('created_by')->references('id')->on('users');
             $table->timestamps();
         });
     }

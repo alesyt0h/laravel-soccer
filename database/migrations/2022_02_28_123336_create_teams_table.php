@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('college_owner')->nullable()->references('id')->on('colleges');
             $table->foreignId('club_owner')->nullable()->references('id')->on('clubs');
             $table->string('shield', 255)->nullable();
+            $table->foreignId('created_by')->references('id')->on('users');
             $table->date('foundation_date');
             $table->timestamps();
         });
