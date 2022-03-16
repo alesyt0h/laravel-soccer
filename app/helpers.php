@@ -1,8 +1,14 @@
 <?php
 
 if (! function_exists('isSameUser')) {
-    function isSameUser($entity){
-        return $entity->created_by === auth()->user()->id;
+    function isSameUserOrAdmin($entity){
+        return $entity->created_by === auth()->user()->id || isAdmin();
+    }
+}
+
+if (! function_exists('isAdmin')) {
+    function isAdmin(){
+        return auth()->user()->role === 'admin';
     }
 }
 
