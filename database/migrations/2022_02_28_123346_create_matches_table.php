@@ -18,8 +18,9 @@ return new class extends Migration
             $table->foreignId('visitor')->references('id')->on('teams');
             $table->foreignId('local')->references('id')->on('teams');
             $table->dateTimeTz('match_date');
-            $table->enum('result', ['local', 'visitor', 'draw', 'not played yet'])->nullable();
-            $table->enum('status', ['played', 'canceled', 'in progress']);
+            $table->enum('result', ['local', 'visitor', 'draw', 'not played yet'])->default('not played yet');
+            $table->enum('status', ['played', 'canceled', 'in progress'])->default('in progress');
+            $table->foreignId('created_by')->references('id')->on('users');
             $table->timestamps();
         });
     }

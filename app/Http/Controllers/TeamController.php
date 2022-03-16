@@ -7,6 +7,7 @@ use App\Models\Club;
 use App\Models\College;
 use App\Models\Team;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TeamController extends Controller
 {
@@ -30,6 +31,9 @@ class TeamController extends Controller
     }
 
     public function edit(Team $team){
+
+        if(!isSameUserOrAdmin($team)) return redirect()->back();
+
         $colleges = $this->getColleges();
         $clubs = $this->getClubs();
 
@@ -43,11 +47,17 @@ class TeamController extends Controller
     }
 
     public function delete(Team $team){
+
+        if(!isSameUserOrAdmin($team)) return redirect()->back();
+
         return view('team.delete', ['team' => $team]);
     }
 
     public function destroy(Team $team){
         try {
+
+            if(!isSameUserOrAdmin($team)) return redirect()->back();
+
             $team->delete();
 
             $success = true;
@@ -63,6 +73,9 @@ class TeamController extends Controller
 
     public function update(TeamRequest $request, Team $team){
         try {
+
+            if(!isSameUserOrAdmin($team)) return redirect()->back();
+
             $team->club_owner = null;
             $team->college_owner = null;
             $team[$request->owner_type . '_owner'] = $request->owner;
@@ -81,6 +94,7 @@ class TeamController extends Controller
     public function store(TeamRequest $request){
 
         try {
+            $request['created_by'] = Auth::user()->id;
             $team = Team::create($request->all());
             $team[$request->owner_type . '_owner'] = $request->owner;
 

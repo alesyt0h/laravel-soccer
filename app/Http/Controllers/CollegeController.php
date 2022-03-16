@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CollegeRequest;
 use App\Models\College;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CollegeController extends Controller
 {
@@ -22,15 +23,24 @@ class CollegeController extends Controller
     }
 
     public function edit(College $college){
+
+        if(!isSameUserOrAdmin($college)) return redirect()->back();
+
         return view('college.update', ['college' => $college]);
     }
 
     public function delete(College $college){
+
+        if(!isSameUserOrAdmin($college)) return redirect()->back();
+
         return view('college.delete', ['college' => $college]);
     }
 
     public function destroy(College $college){
         try {
+
+            if(!isSameUserOrAdmin($college)) return redirect()->back();
+
             $college->delete();
 
             $success = true;
@@ -46,6 +56,9 @@ class CollegeController extends Controller
 
     public function update(CollegeRequest $request, College $college){
         try {
+
+            if(!isSameUserOrAdmin($college)) return redirect()->back();
+
             $college->update($request->all());
 
             return redirect()->route('college.show', $college);
@@ -58,6 +71,7 @@ class CollegeController extends Controller
 
     public function store(CollegeRequest $request){
         try {
+            $request['created_by'] = Auth::user()->id;
             $college = College::create($request->all());
             $college->save();
 

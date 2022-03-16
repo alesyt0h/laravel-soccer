@@ -21,6 +21,7 @@ class Matches extends Model
             'matches.match_date',
             'matches.result',
             'matches.status',
+            'matches.created_by',
             'matches.created_at',
             'matches.updated_at'
         )->from('matches')
