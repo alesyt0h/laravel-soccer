@@ -1,10 +1,10 @@
 (function(){
 
     // Button Declarations
-    const collegeBtn = document.querySelector('#college-btn');
-    const clubBtn = document.querySelector('#club-btn');
-    const teamBtn = document.querySelector('#team-btn');
-    const matchBtn = document.querySelector('#match-btn');
+    const collegeMenu = document.querySelector('#college-menu');
+    const clubMenu = document.querySelector('#club-menu');
+    const teamMenu = document.querySelector('#team-menu');
+    const matchMenu = document.querySelector('#match-menu');
 
     // Section Declarations
     const collegeSection = document.querySelector('#college-section');
@@ -13,14 +13,10 @@
     const matchSection = document.querySelector('#match-section');
 
     // Expand/Collapse Icons
-    const collegeExpand = document.querySelector('#college-expand');
-    const collegeCollapse = document.querySelector('#college-collapse');
-    const clubExpand = document.querySelector('#club-expand');
-    const clubCollapse = document.querySelector('#club-collapse');
-    const teamExpand = document.querySelector('#team-expand');
-    const teamCollapse = document.querySelector('#team-collapse');
-    const matchExpand = document.querySelector('#match-expand');
-    const matchCollapse = document.querySelector('#match-collapse');
+    const collegeIcon = document.querySelector('#college-icon');
+    const clubIcon = document.querySelector('#club-icon');
+    const teamIcon = document.querySelector('#team-icon');
+    const matchIcon = document.querySelector('#match-icon');
 
     // Current URL
     const url = window.location.href;
@@ -28,86 +24,122 @@
     if(url.includes('college')){
         collegeSection.classList.toggle('hidden');
 
-        collegeExpand.classList.add('hidden');
-        collegeCollapse.classList.remove('hidden')
+        collegeMenu.classList.add('text-gray-700', 'font-semibold');
+
+        collegeIcon.classList.remove('fa-angle-right');
+        collegeIcon.classList.add('fa-angle-down');
     }
 
     if(url.includes('club')){
         clubSection.classList.toggle('hidden');
 
-        clubExpand.classList.add('hidden');
-        clubCollapse.classList.remove('hidden')
+        clubMenu.classList.add('text-gray-700', 'font-semibold');
+
+        clubIcon.classList.remove('fa-angle-right');
+        clubIcon.classList.add('fa-angle-down');
     }
 
     if(url.includes('team')){
         teamSection.classList.toggle('hidden');
 
-        teamExpand.classList.add('hidden');
-        teamCollapse.classList.remove('hidden')
+        teamMenu.classList.add('text-gray-700', 'font-semibold');
+
+        teamIcon.classList.remove('fa-angle-right');
+        teamIcon.classList.add('fa-angle-down');
     }
 
     if(url.includes('match')){
         matchSection.classList.toggle('hidden');
 
-        matchExpand.classList.add('hidden');
-        matchCollapse.classList.remove('hidden')
+        matchMenu.classList.add('text-gray-700', 'font-semibold');
+
+        matchIcon.classList.remove('fa-angle-right');
+        matchIcon.classList.add('fa-angle-down');
     }
 
-    collegeBtn.addEventListener('click', () => {
-        collegeSection.classList.toggle('hidden');
+    collegeMenu.addEventListener('click', (e) => {
 
-        if(collegeSection.classList.contains('hidden')){
-            collegeExpand.classList.remove('hidden');
-            collegeCollapse.classList.add('hidden')
-        } else {
-            collegeExpand.classList.add('hidden');
-            collegeCollapse.classList.remove('hidden')
+        if(e.target.id === 'college-menu'){
+
+            if(collegeSection.classList.contains('hidden')){
+                collegeIcon.classList.remove('fa-angle-right');
+                collegeIcon.classList.add('fa-angle-down');
+            } else {
+                collegeIcon.classList.remove('fa-angle-down');
+                collegeIcon.classList.add('fa-angle-right');
+            }
+
+            collegeSection.classList.toggle('hidden');
         }
     });
 
-    clubBtn.addEventListener('click', () => {
-        clubSection.classList.toggle('hidden');
+    clubMenu.addEventListener('click', (e) => {
 
-        if(clubSection.classList.contains('hidden')){
-            clubExpand.classList.remove('hidden');
-            clubCollapse.classList.add('hidden')
-        } else {
-            clubExpand.classList.add('hidden');
-            clubCollapse.classList.remove('hidden')
+        if(e.target.id === 'club-menu'){
+
+            if(clubSection.classList.contains('hidden')){
+                clubIcon.classList.remove('fa-angle-right');
+                clubIcon.classList.add('fa-angle-down');
+            } else {
+                clubIcon.classList.remove('fa-angle-down');
+                clubIcon.classList.add('fa-angle-right');
+            }
+
+            clubSection.classList.toggle('hidden');
         }
     });
 
-    teamBtn.addEventListener('click', () => {
-        teamSection.classList.toggle('hidden');
+    teamMenu.addEventListener('click', (e) => {
 
-        if(teamSection.classList.contains('hidden')){
-            teamExpand.classList.remove('hidden');
-            teamCollapse.classList.add('hidden')
-        } else {
-            teamExpand.classList.add('hidden');
-            teamCollapse.classList.remove('hidden')
+        if(e.target.id === 'team-menu'){
+
+            if(teamSection.classList.contains('hidden')){
+                teamIcon.classList.remove('fa-angle-right');
+                teamIcon.classList.add('fa-angle-down');
+            } else {
+                teamIcon.classList.remove('fa-angle-down');
+                teamIcon.classList.add('fa-angle-right');
+            }
+
+            teamSection.classList.toggle('hidden');
         }
     });
 
-    matchBtn.addEventListener('click', () => {
-        matchSection.classList.toggle('hidden');
+    matchMenu.addEventListener('click', (e) => {
 
-        if(matchSection.classList.contains('hidden')){
-            matchExpand.classList.remove('hidden');
-            matchCollapse.classList.add('hidden')
-        } else {
-            matchExpand.classList.add('hidden');
-            matchCollapse.classList.remove('hidden')
+        if(e.target.id === 'match-menu'){
+
+            if(matchSection.classList.contains('hidden')){
+                matchIcon.classList.remove('fa-angle-right');
+                matchIcon.classList.add('fa-angle-down');
+            } else {
+                matchIcon.classList.remove('fa-angle-down');
+                matchIcon.classList.add('fa-angle-right');
+            }
+
+            matchSection.classList.toggle('hidden');
         }
     });
 
 })();
 
-function mobileMenuOpener(){
-    document.querySelector('aside').classList.remove('hidden');
-    document.querySelector('#sidebar-show').classList.toggle('hidden');
-}
-function mobileMenuCloser(){
-    document.querySelector('aside').classList.add('hidden');
-    document.querySelector('#sidebar-show').classList.toggle('hidden');
+var sidebar = document.querySelector('#sidebar');
+function sidebarToggle() {
+
+    if (sidebar.classList.contains('md:block')) {
+
+        sidebar.classList.remove('md:block');
+        sidebar.classList.remove('lg:block');
+
+        if (window.matchMedia('(min-width:640px)').matches) {
+            sidebar.classList.add('hidden');
+        } else {
+            sidebar.classList.remove('hidden');
+        }
+    } else {
+        sidebar.classList.add('md:block');
+        sidebar.classList.add('lg:block');
+
+        sidebar.classList.add('hidden');
+    }
 }

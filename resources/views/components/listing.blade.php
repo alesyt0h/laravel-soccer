@@ -1,107 +1,94 @@
-<div class="sm:px-6 w-11/12 m-auto">
-    <div class="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10 rounded-lg shadow-md">
-        <div class="text-2xl text-center">
+<div class="rounded overflow-hidden shadow-lg bg-white mx-2 w-full">
+    <div class="px-6 py-2 border-b border-light-grey">
+        <div class="font-bold text-xl">
             {{ ucfirst(Str::plural($type)) }}
         </div>
-        <div class="mt-7 overflow-auto">
-            <table class="w-full whitespace-nowrap">
-                @if (count($entity) !== 0)
-                    <tbody>
-                        <tr>
-                            <th>#</th>
-                            <th></th>
-                            <th>Name</th>
-                            <th>{{ ($type === 'match') ? 'Match Date' : 'Foundation Year'}}</th>
-                            @if ($from === 'show')
-                                <th>Created on</th>
-                                <th>Last updated</th>
-                            @endif
-                            <th>Edit</th>
-                            <th>Deletion</th>
-                        </tr>
-                        @foreach ($entity as $ent)
-                            <tr tabindex="0" class="focus:outline-none h-16 border border-gray-100 rounded">
-                                {{-- Numeration --}}
-                                <td>
-                                    <div class="ml-5">
-                                        <div class="bg-gray-200 rounded-sm w-5 h-5 flex flex-shrink-0 justify-center items-center relative">
-                                            {{ $loop->index + 1 }}.
-                                        </div>
-                                    </div>
-                                </td>
-                                {{-- Shield --}}
-                                <td>
-                                    @if ($type !== 'match')
-                                        <div class="ml-5">
-                                            <div class="h-[40px] w-[40px] rounded-sm flex flex-shrink-0 justify-center items-center relative">
-                                                <img src="{{$ent->shield ?? asset('images/no-shield.png')}}" width="40" height="40">
-                                            </div>
-                                        </div>
-                                    @endif
-                                </td>
-                                {{-- Name --}}
-                                <td class="truncate max-w-[200px]">
-                                    <div class="flex items-center pl-5">
-                                        <p class="truncate text-base font-medium leading-none text-gray-700 mr-2">
-                                            <a href="{{route("${type}.show", $ent->id)}}" class="text-sky-700">
-                                                {{($ent->name) ? $ent->name : $ent->local . ' vs ' . $ent->visitor}}
-                                            </a>
-                                        </p>
-                                    </div>
-                                </td>
-                                {{-- Foundation Date --}}
-                                <td class="pl-24">
-                                    <div class="flex items-center">
-                                        <p class="text-sm leading-none text-gray-600 ml-2">
-                                            {{( $type === 'match') ?
-                                                    Carbon\Carbon::parse($ent->match_date)->format('d/m/Y H:m') :
-                                                    Carbon\Carbon::parse($ent->foundation_date)->format('Y')
-                                            }}
-                                        </p>
-                                    </div>
-                                </td>
-                                @if ($from === 'show')
-                                    {{-- Created Date --}}
-                                    <td class="pl-5">
-                                        <div class="flex items-center">
-                                            <p class="text-sm leading-none text-gray-600 ml-2">
-                                                {{$ent->created_at->toDateString()}}
-                                            </p>
-                                        </div>
-                                    </td>
-                                    {{-- Last updated --}}
-                                    <td class="pl-5">
-                                        <div class="flex items-center">
-                                            <p class="text-sm leading-none text-gray-600 ml-2">
-                                                {{$ent->updated_at->diffForHumans()}}
-                                            </p>
-                                        </div>
-                                    </td>
-                                @endif
-                                {{-- Edit & Delete --}}
-                                @if (isSameUserOrAdmin($ent))
-                                    <td class="pl-4">
-                                        <a href="{{route("${type}.edit", $ent->id)}}" class="focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none">Edit</a>
-                                    </td>
-                                    <td class="pl-4">
-                                        <a href="{{route("${type}.delete", $ent->id)}}" class="focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none">Delete</a>
-                                    </td>
-                                @endif
-                            </tr>
-                            <tr class="h-3"></tr>
-                        @endforeach
-                    </tbody>
-                    @else
-                        There is no {{Str::plural($type)}} created, please, <a href="{{route("${type}.create")}}" class="text-blue-500">create</a> one to see it here
+    </div>
+    <div class="table-responsive">
+        @if (count($entity) !== 0)
+            <table class="table text-grey-darkest">
+                <thead class="bg-grey-dark text-white text-normal">
+                <tr>
+                    <th scope="col">#</th>
+                    @if ($type !== 'match')
+                        <th scope="col">Shield</th>
                     @endif
-                </table>
-            </div>
+                    <th scope="col">Name</th>
+                    <th scope="col">{{ ($type === 'match') ? 'Match Date' : 'Foundation Year'}}</th>
+                    <th scope="col">{{ ($type === 'match') ? 'Result' : 'Created on'}}</th>
+                    <th scope="col">Last updated</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Deletion</th>
+                </tr>
+                </thead>
+                <tbody>
+                    @foreach ($entity as $ent)
+                        <tr class="border-b border-light-grey">
+                            <th scope="row">{{ $loop->index + 1 }}</th>
+                            @if ($type !== 'match')
+                                <td>
+                                    <div class="h-[40px] w-[40px] rounded-sm flex flex-shrink-0 justify-center items-center relative">
+                                        <img src="{{$ent->shield ?? asset('images/no-shield.png')}}" width="40" height="40">
+                                    </div>
+                                </td>
+                            @endif
+                            <td>
+                                <a href="{{route("${type}.show", $ent->id)}}">
+                                    <button class="bg-blue-500 hover:bg-blue-800 text-white font-light py-1 px-2 rounded-full">
+                                        {{($ent->name) ? $ent->name : $ent->local . ' vs ' . $ent->visitor}}
+                                    </button>
+                                </a>
+                            </td>
+                            <td class="text-right text-sm align-middle">
+                                {{( $type === 'match') ?
+                                    Carbon\Carbon::parse($ent->match_date)->format('d/m/Y H:m') :
+                                    Carbon\Carbon::parse($ent->foundation_date)->format('Y')
+                                }}
+                            </td>
+                            <td class="pl-5 align-middle">
+                                <div class="flex">
+                                    <p class="text-sm text-gray-600 ml-2">
+                                        @if ($type === 'match')
+                                            {{ucwords($ent->result)}}
+                                            @if ($ent->result === 'local' || $ent->result === 'visitor')
+                                                <span> team wins</span>
+                                            @endif
+                                        @else
+                                           {{$ent->created_at->toDateString()}}
+                                        @endif
+                                    </p>
+                                </div>
+                            </td>
+                            <td class="pl-5 align-middle">
+                                <div class="flex items-center">
+                                    <p class="text-sm text-gray-600 ml-2">
+                                        {{$ent->updated_at->diffForHumans()}}
+                                    </p>
+                                </div>
+                            </td>
+                            @if (isSameUserOrAdmin($ent))
+                                <td class="pl-4">
+                                    <a href="{{route("${type}.edit", $ent->id)}}" class="text-sm leading-none text-blue-600 hover:underline">Edit</a>
+                                </td>
+                                <td class="pl-4">
+                                    <a href="{{route("${type}.delete", $ent->id)}}" class="text-sm leading-none text-blue-600 hover:underline">Delete</a>
+                                </td>
+                            @endif
+                        </tr>
+                    @endforeach
+                </tbody>
+        @else
+            <span class="m-4 block">
+                There is no {{Str::plural($type)}} created, please, <a href="{{route("${type}.create")}}" class="text-blue-500">create</a> one to see it here
+            </span>
+        @endif
+            </table>
             @if ($from === 'home' && count($entity) !== 0)
-                <a href="{{route("${type}.show")}}" class="mt-4 inline-block focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none">
+                <a href="{{route("${type}.show")}}" class="pl-4 pb-4 inline-block text-sm leading-none text-blue-500 hover:underline">
                     Show all {{Str::plural($type)}}
                 </a>
             @elseif ($from !== 'home')
                 {{$entity->links()}}
             @endif
         </div>
-    </div>
+</div>
