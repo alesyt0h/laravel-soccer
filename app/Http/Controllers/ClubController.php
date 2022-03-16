@@ -24,14 +24,14 @@ class ClubController extends Controller
 
     public function edit(Club $club){
 
-        if(!isSameUser($club)) return redirect()->back();
+        if(!isSameUserOrAdmin($club)) return redirect()->back();
 
         return view('club.update', ['club' => $club]);
     }
 
     public function delete(Club $club){
 
-        if(!isSameUser($club)) return redirect()->back();
+        if(!isSameUserOrAdmin($club)) return redirect()->back();
 
         return view('club.delete', ['club' => $club]);
     }
@@ -39,7 +39,7 @@ class ClubController extends Controller
     public function destroy(Club $club){
         try {
 
-            if(!isSameUser($club)) return redirect()->back();
+            if(!isSameUserOrAdmin($club)) return redirect()->back();
 
             $club->delete();
 
@@ -57,7 +57,7 @@ class ClubController extends Controller
     public function update(ClubRequest $request, Club $club){
         try {
 
-            if(!isSameUser($club)) return redirect()->back();
+            if(!isSameUserOrAdmin($club)) return redirect()->back();
 
             $club->update($request->all());
 

@@ -35,7 +35,7 @@ class MatchController extends Controller
 
     public function edit(Matches $match){
 
-        if(!isSameUser($match)) return redirect()->back();
+        if(!isSameUserOrAdmin($match)) return redirect()->back();
 
         $teams = Team::all();
 
@@ -49,7 +49,7 @@ class MatchController extends Controller
 
     public function delete(Matches $match){
 
-        if(!isSameUser($match)) return redirect()->back();
+        if(!isSameUserOrAdmin($match)) return redirect()->back();
 
         $match->visitor = Team::select('name', 'shield')->where('id', $match->visitor)->first();
         $match->local = Team::select('name', 'shield')->where('id', $match->local)->first();
@@ -60,7 +60,7 @@ class MatchController extends Controller
     public function destroy(Matches $match){
         try {
 
-            if(!isSameUser($match)) return redirect()->back();
+            if(!isSameUserOrAdmin($match)) return redirect()->back();
 
             $visitor = Team::select('name')->where('id', $match->visitor)->first();
             $local = Team::select('name')->where('id', $match->local)->first();
@@ -79,7 +79,7 @@ class MatchController extends Controller
     public function update(MatchRequest $request, Matches $match){
         try {
 
-            if(!isSameUser($match)) return redirect()->back();
+            if(!isSameUserOrAdmin($match)) return redirect()->back();
 
             $match->update($request->all());
 
