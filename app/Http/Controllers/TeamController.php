@@ -32,7 +32,7 @@ class TeamController extends Controller
 
     public function edit(Team $team){
 
-        if(!isSameUser($team)) return redirect()->back();
+        if(!isSameUserOrAdmin($team)) return redirect()->back();
 
         $colleges = $this->getColleges();
         $clubs = $this->getClubs();
@@ -48,7 +48,7 @@ class TeamController extends Controller
 
     public function delete(Team $team){
 
-        if(!isSameUser($team)) return redirect()->back();
+        if(!isSameUserOrAdmin($team)) return redirect()->back();
 
         return view('team.delete', ['team' => $team]);
     }
@@ -56,7 +56,7 @@ class TeamController extends Controller
     public function destroy(Team $team){
         try {
 
-            if(!isSameUser($team)) return redirect()->back();
+            if(!isSameUserOrAdmin($team)) return redirect()->back();
 
             $team->delete();
 
@@ -74,7 +74,7 @@ class TeamController extends Controller
     public function update(TeamRequest $request, Team $team){
         try {
 
-            if(!isSameUser($team)) return redirect()->back();
+            if(!isSameUserOrAdmin($team)) return redirect()->back();
 
             $team->club_owner = null;
             $team->college_owner = null;

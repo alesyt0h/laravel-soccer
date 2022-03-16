@@ -24,15 +24,14 @@ class CollegeController extends Controller
 
     public function edit(College $college){
 
-        if(!isSameUser($college)) return redirect()->back();
-
+        if(!isSameUserOrAdmin($college)) return redirect()->back();
 
         return view('college.update', ['college' => $college]);
     }
 
     public function delete(College $college){
 
-        if(!isSameUser($college)) return redirect()->back();
+        if(!isSameUserOrAdmin($college)) return redirect()->back();
 
         return view('college.delete', ['college' => $college]);
     }
@@ -40,7 +39,7 @@ class CollegeController extends Controller
     public function destroy(College $college){
         try {
 
-            if(!isSameUser($college)) return redirect()->back();
+            if(!isSameUserOrAdmin($college)) return redirect()->back();
 
             $college->delete();
 
@@ -58,7 +57,7 @@ class CollegeController extends Controller
     public function update(CollegeRequest $request, College $college){
         try {
 
-            if(!isSameUser($college)) return redirect()->back();
+            if(!isSameUserOrAdmin($college)) return redirect()->back();
 
             $college->update($request->all());
 
