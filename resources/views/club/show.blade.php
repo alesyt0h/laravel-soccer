@@ -52,12 +52,14 @@
                     </dl>
                 </div>
             </div>
-            <a href="{{route('club.edit', $club)}}" class="px-4 py-2 font-semibold text-sm bg-cyan-800 text-white rounded-lg shadow-sm mt-4" type="submit">
-                Edit
-            </a>
-            <a href="{{route('club.delete', $club)}}" class="px-4 py-2 font-semibold text-sm bg-rose-600 text-white rounded-lg shadow-sm mt-4 float-right">
-                Delete
-            </a>
+            @if (isSameUserOrAdmin($club))
+                <a href="{{route('club.edit', $club)}}" class="px-4 py-2 font-semibold text-sm bg-cyan-800 text-white rounded-lg shadow-sm mt-4" type="submit">
+                    Edit
+                </a>
+                <a href="{{route('club.delete', $club)}}" class="px-4 py-2 font-semibold text-sm bg-rose-600 text-white rounded-lg shadow-sm mt-4 float-right">
+                    Delete
+                </a>
+            @endif
         </div>
     @else
         <x-listing :entity="$clubs" type="club" from="show"/>
