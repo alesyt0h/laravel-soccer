@@ -6,6 +6,7 @@ use App\Http\Requests\MatchRequest;
 use App\Models\Matches;
 use App\Models\Team;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MatchController extends Controller
 {
@@ -33,6 +34,9 @@ class MatchController extends Controller
     }
 
     public function edit(Matches $match){
+
+        if(!isSameUserOrAdmin($match)) return redirect()->back();
+
         $teams = Team::all();
 
         return view('match.update', [
@@ -44,6 +48,9 @@ class MatchController extends Controller
     }
 
     public function delete(Matches $match){
+
+        if(!isSameUserOrAdmin($match)) return redirect()->back();
+
         $match->visitor = Team::select('name', 'shield')->where('id', $match->visitor)->first();
         $match->local = Team::select('name', 'shield')->where('id', $match->local)->first();
 
@@ -52,6 +59,9 @@ class MatchController extends Controller
 
     public function destroy(Matches $match){
         try {
+
+            if(!isSameUserOrAdmin($match)) return redirect()->back();
+
             $visitor = Team::select('name')->where('id', $match->visitor)->first();
             $local = Team::select('name')->where('id', $match->local)->first();
 
@@ -68,6 +78,9 @@ class MatchController extends Controller
 
     public function update(MatchRequest $request, Matches $match){
         try {
+
+            if(!isSameUserOrAdmin($match)) return redirect()->back();
+
             $match->update($request->all());
 
             return redirect()->route('match.show', $match);
@@ -81,6 +94,7 @@ class MatchController extends Controller
     public function store(MatchRequest $request){
 
         try {
+            $request['created_by'] = Auth::user()->id;
             $match = Matches::create($request->all());
 
             $match->save();

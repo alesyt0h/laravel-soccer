@@ -13,8 +13,27 @@
                 </svg>
             </button>
         </div>
-
     </div>
+    {{-- User Area --}}
+    @auth
+        <div class="border-b border-gray-200/20 py-2 flex justify-between items-center pb-4 pl-2">
+            <span>Welcome, <strong>{{ auth()->user()->username }}</strong></span>
+            <form action="{{route('logout')}}" method="POST" id="logoutForm">
+                @csrf
+                <a onclick="document.querySelector('#logoutForm').submit(); return false;" class="underline mr-2 cursor-pointer hover:text-gray-400">Logout</a>
+            </form>
+        </div>
+    @endauth
+    @guest
+        <div class="border-b border-gray-200/20 py-2 flex justify-start items-center pb-4 pl-2">
+            <a href="{{route('login')}}" class="px-4 py-2 font-semibold text-sm bg-cyan-800 text-white rounded-lg shadow-sm mr-4">
+                Login
+            </a>
+            <a href="{{route('register')}}" class="px-4 py-2 font-semibold text-sm bg-cyan-600 text-white rounded-lg shadow-sm">
+                Register
+            </a>
+        </div>
+    @endguest
     {{-- College --}}
     <div class="border-b border-gray-200/20 py-2">
         <h3 class="-my-3 flow-root">

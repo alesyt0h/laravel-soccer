@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ClubRequest;
 use App\Models\Club;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClubController extends Controller
 {
@@ -22,15 +23,24 @@ class ClubController extends Controller
     }
 
     public function edit(Club $club){
+
+        if(!isSameUserOrAdmin($club)) return redirect()->back();
+
         return view('club.update', ['club' => $club]);
     }
 
     public function delete(Club $club){
+
+        if(!isSameUserOrAdmin($club)) return redirect()->back();
+
         return view('club.delete', ['club' => $club]);
     }
 
     public function destroy(Club $club){
         try {
+
+            if(!isSameUserOrAdmin($club)) return redirect()->back();
+
             $club->delete();
 
             $success = true;
@@ -46,6 +56,9 @@ class ClubController extends Controller
 
     public function update(ClubRequest $request, Club $club){
         try {
+
+            if(!isSameUserOrAdmin($club)) return redirect()->back();
+
             $club->update($request->all());
 
             return redirect()->route('club.show', $club);
@@ -59,6 +72,7 @@ class ClubController extends Controller
     public function store(ClubRequest $request){
 
         try {
+            $request['created_by'] = Auth::user()->id;
             $club = Club::create($request->all());
             $club->save();
 
