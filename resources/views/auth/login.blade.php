@@ -3,7 +3,7 @@
 @section('title', 'Login')
 
 @section('content')
-    <div class="flex flex-col">
+    <div class="flex flex-col shadow-2xl rounded-lg p-8">
         <x-guest-layout>
             <x-auth-card>
                 <x-slot name="logo">
